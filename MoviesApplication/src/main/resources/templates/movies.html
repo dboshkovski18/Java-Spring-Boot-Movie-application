@@ -1,0 +1,42 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <form style="padding: 10px" th:method="GET" th:action="@{/movies}">
+            <input name="search" style="margin: 0 auto; text-align: center" type="text" class="form-control" placeholder="Search for a movie..." aria-describedby="basic-addon2">
+        </form>
+    </div>
+    <div  class="container jumbotron">
+        <div class="row">
+
+            <div style="padding: 10px" class="col-md-4 " th:each="movie : ${movies}">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" th:src="${movie.image}" width="200px" height="300px" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${movie.name}"></h5>
+                        <p><b class="card-title" th:text="${movie.year}"></b></p>
+                        <a th:href="@{'/movies/{id}' (id=${movie.id})}" class="btn btn-success">Preview</a>
+                        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a th:href="@{'/movies/delete/{id}' (id=${movie.id})}" class="btn btn-danger btn-sm">Remove</a>
+                            <a th:href="@{'/movies/edit/{id}' (id=${movie.id})}" class="btn btn-info btn-sm">Edit</a>
+                        </th:block>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+<style>
+    .truncate {
+        width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+

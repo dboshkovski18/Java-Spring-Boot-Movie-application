@@ -1,0 +1,57 @@
+<div xmlns:th="http://www.thymeleaf.org">
+
+    <div class="container">
+        <div class="jumbotron">
+            <h3 style="text-align: center">Add a movie</h3>
+        </div>
+        <form th:method="POST" th:action="@{/movies/add}">
+            <input th:if="${movie != null}" name="id" th:value="${movie.id}" hidden>
+            <div class="form-group">
+                <label for="name">Movie Name</label>
+                <input th:if="${movie == null}" name="name" type="text" class="form-control" id="name" placeholder="Movie name">
+                <input th:if="${movie != null}" name="name" type="text" class="form-control" id="name" placeholder="Movie name" th:value="${movie.name}">
+            </div>
+            <div class="form-group">
+                <label for="year">Year released</label>
+                <input th:if="${movie == null}" name="year" type="number" class="form-control" id="year" placeholder="Year">
+                <input th:if="${movie != null}" th:value="${movie.year}" name="year" type="number" class="form-control" id="year" placeholder="Year">
+            </div>
+            <div class="form-group">
+                <label for="image">Image URL</label>
+                <input th:if="${movie == null}" name="image" type="text" class="form-control" id="image" placeholder="Image URL">
+                <input th:if="${movie != null}" th:value="${movie.image}" name="image" type="text" class="form-control" id="image" placeholder="Image URL">
+
+            </div>
+
+            <div class="form-group">
+                <label for="trailer">Trailer URL</label>
+                <input th:if="${movie == null}" name="trailer" type="text" class="form-control" id="trailer" placeholder="Trailer URL">
+                <input th:if="${movie != null}" th:value="${movie.trailer}" name="trailer" type="text" class="form-control" id="trailer" placeholder="Trailer URL">
+
+            </div>
+
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea  th:if="${movie == null}" name="description" class="form-control" id="description" rows="3"></textarea>
+                <textarea  th:if="${movie != null}" th:text="${movie.description}" name="description" class="form-control" id="description" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="director">Select director:</label>
+                <select class="form-control" id="director" name="director">
+                    <option th:each="d : ${directors}" th:text="${d.name} +' '+ ${d.surname}" th:value="${d.id}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="company">Select production company:</label>
+                <select class="form-control" id="company" name="company">
+                    <option th:each="c : ${companies}" th:text="${c.name}" th:value="${c.id}"></option>
+                </select>
+            </div>
+
+            <button class="btn btn-success btn-lg">Submit</button>
+        </form>
+    </div>
+</div>

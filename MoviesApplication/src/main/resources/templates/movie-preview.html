@@ -1,0 +1,14 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <div class="container jumbotron">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 th:text="${movie.name}"></h3>
+                <p><b th:text="${movie.year}"></b></p>
+                <p th:text="${movie.description}"></p>
+
+                <iframe width="560" height="315" th:src="${movie.trailer}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
+    </div>
+</div>

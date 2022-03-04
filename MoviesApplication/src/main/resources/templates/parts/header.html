@@ -1,0 +1,64 @@
+<header xmlns:th="http://www.thymeleaf.org">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+
+            <a class="navbar-brand" href="/home"><img width="150" height="100" src="https://www.pngall.com/wp-content/uploads/4/Netflix-Official-Logo.png"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item m-auto">
+                        <a style="font-size: 22px" class="nav-link active effect" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item m-auto">
+                        <a style="font-size: 22px" class="nav-link active effect" href="/movies">Movies</a>
+                    </li>
+
+                </ul>
+
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li class="nav-item" >
+                        <a class="nav-link" href="#">
+                            <th:block th:if="${#request.getRemoteUser() != null}"
+                                      th:text="${#request.getRemoteUser()}"></th:block>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+
+                        <th:block th:if="${#request.getRemoteUser()} == null">
+                            <a class="btn btn-info btn-lg ml-3" href="/login">
+                                <i class="fa fa-shopping-cart"></i> Login
+                            </a>
+                        </th:block>
+
+                        <th:block th:if="${#request.getRemoteUser()} != null">
+                            <a class="btn btn-danger btn-lg ml-3" href="/logout">
+                                <i class="fa fa-shopping-cart"></i>Logout
+                            </a>
+                        </th:block>
+
+
+
+                        <a sec:authorize="hasRole('ROLE_ADMIN')"  class="btn btn-primary btn-lg ml-3" href="/movies/add">
+                            <i class="fa fa-shopping-cart"></i>Add a Movie
+                        </a>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+<style>
+    .effect :hover{
+        color: darkred;
+    }
+</style>
